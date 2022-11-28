@@ -45,7 +45,7 @@ void MatrixPrint(int** mainMatrix, int size1, int size2,string s1,string s3)
 		SetConsoleTextAttribute(hConsole, 11);
 		cout << s1[i] << " ";
 		SetConsoleTextAttribute(hConsole, 12);
-			cout<< i << " ";
+			cout<< i+1 << " ";
 		
 		for (int j = 0; j < size2; j++)
 		{
