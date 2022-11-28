@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <windows.h>  
 using namespace std;
-void ArrayPrint(int *U , int *ShiftAnd_,int * M, int size,int count)
+void ArrayPrint(int *U , int *ShiftAnd_,int * M, int size,int count,string s3)
 {
-	cout << "U{T(" << count+1 << ")}" << " = ";
+	cout << "U{T(" << count+1 << ")}" << " = "<< "U(" << s3[count + 1] << ")" << " = ";
 	for (int i = 0; i < size; i++)
 	{
 		cout << U[i];
@@ -20,14 +21,38 @@ void ArrayPrint(int *U , int *ShiftAnd_,int * M, int size,int count)
 	}
 	cout << endl<<endl;
 }
-void MatrixPrint(int** mainMatrix, int size1, int size2)
+void MatrixPrint(int** mainMatrix, int size1, int size2,string s1,string s3)
 {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout << endl << endl;
 	cout << "Matrix: \n";
+	cout << "      ";
+	SetConsoleTextAttribute(hConsole, 11);
+	for (int i = 1; i < s3.size(); i++)
+	{
+		cout << s3[i]<<" ";
+	}
+	cout << endl;
+	cout << "    ";
+	SetConsoleTextAttribute(hConsole, 12);
+	for (int i = 0; i < s3.size(); i++)
+	{
+		cout << i << " ";
+	}
+	cout << endl;
 	for (int i = 0; i < size1; i++)
 	{
+		SetConsoleTextAttribute(hConsole, 11);
+		cout << s1[i] << " ";
+		SetConsoleTextAttribute(hConsole, 12);
+			cout<< i << " ";
+		
 		for (int j = 0; j < size2; j++)
 		{
+			if (mainMatrix[i][j]==1)
+				SetConsoleTextAttribute(hConsole, 14);
+			else
+				SetConsoleTextAttribute(hConsole, 7);
 			cout << mainMatrix[i][j]<<" ";
 		}
 		cout << endl;
@@ -82,7 +107,7 @@ void ShiftAnd(string s1, string s2)
 
 	
 	check = 0;
-	MatrixPrint(mainMatrix, s1.size(), s3.size());
+	MatrixPrint(mainMatrix, s1.size(), s3.size(),s1,s3);
 	cout << endl << "M(0)" << " = ";
 	for (int i = 0; i < s1.size(); i++)
 	{
@@ -116,7 +141,7 @@ void ShiftAnd(string s1, string s2)
 		{
 			M[t] = ShiftAnd_[t] & U[t];
 		}
-		ArrayPrint(U, ShiftAnd_, M,s1.size(), i-1);
+		ArrayPrint(U, ShiftAnd_, M,s1.size(), i-1,s3);
 		for (int t = 0; t < s1.size(); t++)
 		{
 			M[t] = 0;
@@ -131,6 +156,8 @@ int main()
 	setlocale(LC_ALL, "RUS");
 	string s1;
 	string s2;
+	cout << "made by TE (aka Evgenii)\nShiftAnd\n\n";
+
 	cout << "Ведiть зразок\n";
 	cin >> s1;
 	cout << "Ведiть текст\n";
