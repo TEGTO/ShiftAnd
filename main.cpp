@@ -55,17 +55,15 @@ void ShiftAnd(string s1, string s2)
 			for (int j = 0; j < s3.size(); j++)
 			{
 				check = 1;
-				for (size_t t = 0; t <= i; t++)
+				if (s1[i] == s3[j])
 				{
-					for (size_t k = 1; k <= j; k++)
+					for (int t = 0; t <= i; t++)
 					{
-						if (s1[t] != s3[j - i + k])
+						if (s1[t] != s3[j-i+t])
 						{
 							check = 0;
 						}
 					}
-					
-
 				}
 				if (check)
 				{
