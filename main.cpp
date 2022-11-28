@@ -58,6 +58,7 @@ void MatrixPrint(int** mainMatrix, int size1, int size2,string s1,string s3)
 		cout << endl;
 	}
 	cout << endl << endl;
+	SetConsoleTextAttribute(hConsole, 7);
 }
 void ShiftAnd(string s1, string s2)
 {
