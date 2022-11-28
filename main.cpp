@@ -26,7 +26,7 @@ void MatrixPrint(int** mainMatrix, int size1, int size2)
 	cout << "Matrix: \n";
 	for (int i = 0; i < size1; i++)
 	{
-		for (int j = 0; j < size2+1; j++)
+		for (int j = 0; j < size2; j++)
 		{
 			cout << mainMatrix[i][j]<<" ";
 		}
@@ -55,19 +55,27 @@ void ShiftAnd(string s1, string s2)
 			for (int j = 0; j < s3.size(); j++)
 			{
 				check = 1;
-				if (s1[i] == s3[j])
-				{
+				
 					for (int t = 0; t <= i; t++)
 					{ 
-						if (s1[t] != s3[j-i+t])
+						if ((j - i + t) >= 0)
 						{
-							check = 0;
+							if (s1[t] != s3[j - i + t])
+							{
+								check = 0;
+							}
 						}
+						else
+							check = 0;
+						
 					}
-				}
+				
 				if (check)
 				{
+					if (s1[i] == s3[j])
+					{
 					mainMatrix[i][j] = 1;
+					}
 				}
 			}
 		}
@@ -75,11 +83,17 @@ void ShiftAnd(string s1, string s2)
 	
 	check = 0;
 	MatrixPrint(mainMatrix, s1.size(), s3.size());
-	for (int i = 0; i < s2.size(); i++)
+	cout << endl << "M(0)" << " = ";
+	for (int i = 0; i < s1.size(); i++)
+	{
+		cout << 0;
+	}
+	cout << endl << endl;
+	for (int i = 1; i < s3.size(); i++)
 	{
 		for (int j = 0; j < s1.size(); j++)
 		{
-			if (s1[j] == s2[i])
+			if (s1[j] == s3[i])
 			{
 				U[j] = 1;
 			}
@@ -102,7 +116,7 @@ void ShiftAnd(string s1, string s2)
 		{
 			M[t] = ShiftAnd_[t] & U[t];
 		}
-		ArrayPrint(U, ShiftAnd_, M,s1.size(), i);
+		ArrayPrint(U, ShiftAnd_, M,s1.size(), i-1);
 		for (int t = 0; t < s1.size(); t++)
 		{
 			M[t] = 0;
