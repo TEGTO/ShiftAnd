@@ -58,7 +58,7 @@ void ShiftAnd(string s1, string s2)
 				if (s1[i] == s3[j])
 				{
 					for (int t = 0; t <= i; t++)
-					{
+					{ 
 						if (s1[t] != s3[j-i+t])
 						{
 							check = 0;
